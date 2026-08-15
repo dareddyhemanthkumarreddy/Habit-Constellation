@@ -1,5 +1,5 @@
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -36,7 +36,7 @@ model Checkin {
   user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   habitId       String
   habit         Habit      @relation(fields: [habitId], references: [id], onDelete: Cascade)
-  date          DateTime   @default(now())
+  date          DateTime   @db.Date
   createdAt     DateTime   @default(now())
 
   @@unique([habitId, date])
@@ -46,7 +46,7 @@ model Insight {
   id            String     @id @default(uuid())
   userId        String
   user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  weekStart     DateTime   @default(now())
+  weekStart     DateTime   @db.Date
   content       String
   createdAt     DateTime   @default(now())
 }
