@@ -1,104 +1,207 @@
 # Habit Constellation 🌌
 
-**Track:** Wellness (CSGirlies Hackathon) · **Bonus Tracks:** Best Use of AI, Most Viral  
-**Tech Stack:** React + Vite, React Three Fiber (R3F) + drei, Tailwind CSS, Framer Motion, Zustand, Node.js + Express, Prisma ORM, PostgreSQL, Anthropic API (Claude).
+[![Hackathon: CSGirlies](https://img.shields.io/badge/Hackathon-CSGirlies-blue?logo=rocket)]
+[![Track: Wellness](https://img.shields.io/badge/Track-Wellness-green)]
+[![Bonus: AI](https://img.shields.io/badge/Bonus-Best%20Use%20of%20AI-yellow)]
+[![Tech: React+R3F](https://img.shields.io/badge/Tech-React%2C%20R3F-lightgrey)]
+[![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey)]
+
+Live demo: (add your deployed URL here)  
+Hero demo GIF: (add `/assets/demo.gif` or `/assets/demo.webm`)
+
+One-line: Transform daily habits into a living, interactive 3D night sky — complete a habit, light a star, reveal patterns with AI.
 
 ---
 
-## 🌟 Concept Summary
+## Why Habit Constellation?
+Habit Constellation turns habit tracking into a delightful visual experience so users stay engaged and motivated. Rather than lists or charts alone, users explore a responsive 3D constellation where each completed habit becomes a glowing star; patterns, streaks, and insights emerge as constellations over time.
 
-Habit Constellation turns daily habit tracking into a living night sky. Every completed habit lights up a star in a 3D interactive celestial viewport. Over days and weeks, stars connect into a personal constellation that visibly grows without punishing streak-breaks or guilt UI. An AI layer periodically analyzes star patterns and delivers warm, non-clinical pattern insights.
-
----
-
-## 🎨 Visual Identity & Palette
-
-| Color | Token Hex | Role |
-|---|---|---|
-| **Void Indigo** | `#0B0B1E` | Base cosmic background |
-| **Deep Nebula** | `#1A1440` | Glassmorphic surface cards |
-| **Nebula Violet** | `#6B4FA0` | Accent buttons & borders |
-| **Aurora Teal** | `#3FD9C7` | Active state highlight |
-| **Stardust Gold** | `#F4C95D` | Glowing completed habit star |
-| **Comet Pink** | `#FF6F9C` | CTA hover & streak highlight |
-| **Mist White** | `#E8E6F5` | Primary crisp text |
+Key differentiators:
+- 3D, tactile-first visualization using React Three Fiber (web-native 3D).
+- AI-powered pattern suggestions (Anthropic Claude integration) for non-sensitive, aggregate habit insights.
+- Accessible SVG fallback & respects prefers-reduced-motion.
+- Designed for hackathon demos — fast to show, easy to explain.
 
 ---
 
-## 🚀 Quick Start — Running Locally
+## Key Features
+- Interactive 3D Constellation viewport (zoom, rotate, hover tooltips).
+- Glowing emissive stars for completed habits; animated beams connect related completions.
+- Habit timeline and streak visualizations.
+- Lightweight offline-first client with simple CRUD for habits.
+- AI "Insight" summaries (frequency, clusters, suggested micro-goals) — privacy-first.
+- Responsive UI with Tailwind + Framer Motion polish.
+- Fallback SVG map for reduced-motion and mobile.
 
-### Prerequisites
-- Node.js (v18 or higher)
-- Docker Desktop (for local Postgres database) OR a local/remote PostgreSQL instance
+---
 
-### 1. Database Setup
+## Tech Stack
+- Frontend: React + Vite, React Three Fiber (R3F), @react-three/drei, Tailwind CSS, Framer Motion, Zustand (state).
+- Backend: Node.js, Express
+- DB: PostgreSQL via Prisma ORM
+- AI: Anthropic Claude (server-side, aggregate data only)
+- Optional hosting: Render (render.yaml included) or Vercel / Railway / Supabase
 
-#### Option A: Docker (Recommended)
-Launch the local PostgreSQL container with Docker Compose:
+Core files to highlight
+- client/src/components/constellation/ConstellationCanvas.jsx — 3D scene entry
+- client/src/components/constellation/Star.jsx — emissive star mesh
+- client/src/components/constellation/ConnectionLine.jsx — connecting beams
+- client/src/components/constellation/StaticStarMap.jsx — SVG fallback for reduced-motion
+- server/src/services/ai.service.js — AI aggregate insights
+
+---
+
+## Demo / Visuals (How to show in the hackathon)
+- Place a short hero video/gif (3–8s) at repo root: `/assets/demo.webm` or `/assets/demo.gif`.
+- In-person demo checklist:
+  1. Open Live Demo (or run locally) → show the 3D viewport rotating.
+  2. Mark a habit as completed → watch the star appear and pulse.
+  3. Toggle date range → show how constellations form over days.
+  4. Open "AI Insights" panel → show the automated suggestion summary.
+  5. Toggle "Reduced Motion" → show SVG fallback.
+- Tip: Record a short 10–20s screencast where you complete a habit and AI returns a suggestion — judges love the before/after flow.
+
+---
+
+## Accessibility & Performance
+- Respects prefers-reduced-motion: uses StaticStarMap SVG fallback and turns off heavy animations.
+- Progressive enhancement: 3D scene is visual-only; all controls remain keyboard accessible.
+- Performance: LOD (level-of-detail) meshes, frustum culling via R3F, limited particle counts for older devices.
+
+---
+
+## Quick Start (Local Development)
+
+Prerequisites
+- Node.js v18+ (or latest LTS)
+- PostgreSQL (local or cloud). Docker recommended for local DB.
+
+1) Clone
+```bash
+git clone https://github.com/dareddyhemanthkumarreddy/Habit-Constellation.git
+cd Habit-Constellation
+```
+
+2) Environment
+- Copy env example:
+```bash
+cp .env.example .env
+```
+- Fill `.env`:
+  - DATABASE_URL (postgres)
+  - ANTHROPIC_API_KEY (optional — leave blank for fallback insights)
+  - PORT (optional; default 5000)
+
+3) Start DB (Docker recommended)
+- Using docker-compose (if included):
 ```bash
 docker-compose up -d
 ```
 
-#### Option B: Local PostgreSQL or Cloud Database (Supabase / Neon)
-Ensure PostgreSQL is running locally on port 5432 or update `DATABASE_URL` in `.env`.
-
-### 2. Environment Setup
-Copy `.env.example` to `.env`:
+4) Install & setup backend
 ```bash
-cp .env.example .env
-```
-Add your `ANTHROPIC_API_KEY` to `.env` if available (if left empty, a warm fallback insight generator takes over seamlessly).
-
-### 3. Install Dependencies & Build Frontend
-```bash
-# Install frontend dependencies
-cd client
-npm install
-npm run build
-
-# Install backend dependencies
-cd ../server
+cd server
 npm install
 npx prisma generate
 npx prisma migrate dev --name init
 ```
 
-### 4. Start Local Servers
+5) Install frontend
+```bash
+cd ../client
+npm install
+```
 
-#### Development Mode (Concurrent Frontend & Backend)
-- **Backend (Port 5000):** `cd server && npm run dev`
-- **Frontend (Port 3000):** `cd client && npm run dev`
-
-Open your browser at [http://localhost:3000](http://localhost:3000).
-
-#### Single Service Mode (Express serving built client static dist)
+6) Run in dev mode
+- Backend (port 5000):
 ```bash
 cd server
+npm run dev
+```
+- Frontend (port 3000):
+```bash
+cd client
+npm run dev
+```
+Open: http://localhost:3000
+
+7) Production build (single service)
+- Build client:
+```bash
+cd client
+npm run build
+```
+- Serve via Express:
+```bash
+cd ../server
 npm start
 ```
-Open your browser at [http://localhost:5000](http://localhost:5000).
 
 ---
 
-## ☁️ Render Single-Service Deployment
+## Environment Variables
+Add these (example)
+- DATABASE_URL=postgresql://USER:PASSWORD@localhost:5432/habit_constellation
+- ANTHROPIC_API_KEY=sk-xxxx (optional)
+- NEXTAUTH_URL= (if using auth)
+- PORT=5000
 
-This repository is pre-configured with a Render Blueprint (`render.yaml`) for one-click deployment as a single Web Service:
-
-1. Push your repository to GitHub.
-2. Log into [Render Dashboard](https://dashboard.render.com/) and click **New > Blueprint**.
-3. Select your GitHub repository.
-4. Render will automatically provision:
-   - Managed **Render PostgreSQL** database instance.
-   - **Render Web Service** running the Express server.
-5. In your Web Service settings, set the environment variable `ANTHROPIC_API_KEY` (if desired).
-6. Click **Deploy**.
+Never commit secrets. Use GitHub Secrets / Render Dashboard / Vercel Environment Variables to store keys.
 
 ---
 
-## 🧪 Architecture & Key Components
+## Deployment
+- Single-service: Render Blueprint (render.yaml included) — set `ANTHROPIC_API_KEY` in Render.
+- Alternative: Host frontend on Vercel and backend on Render/Heroku/Railway, connect to managed Postgres.
+- For fastest hackathon demo: Deploy server + DB on Render using the blueprint and point to the deployed URL.
 
-- `client/src/components/constellation/ConstellationCanvas.jsx`: Interactive 3D night sky built with React Three Fiber.
-- `client/src/components/constellation/Star.jsx`: Emissive star mesh with pulse glow animations and HTML hover tooltips.
-- `client/src/components/constellation/ConnectionLine.jsx`: 3D animated beam joining habits completed on identical dates.
-- `client/src/components/constellation/StaticStarMap.jsx`: SVG fallback supporting `prefers-reduced-motion`.
-- `server/src/services/ai.service.js`: Aggregates completion frequencies without sending personal PII, prompting Claude for warm pattern observations.
+---
+
+## Architecture Overview
+1. Client (React + R3F) — renders constellation, handles interactions.
+2. Server (Express + Prisma) — REST API, auth (optional), and AI orchestration.
+3. Database (Postgres) — habits, completions, user metadata.
+4. AI service — server-side aggregated prompts to Anthropic; no raw PII sent.
+
+Flow: client → API endpoints (CRUD) → DB → server aggregates → AI service returns insight summary → client displays.
+
+---
+
+## Roadmap & Hackathon Pitch (What to show judges)
+- Demonstrate the 3D star appearing when a habit is completed, then show AI summary of your last 7 days that recommends a micro-goal.
+- Highlight accessibility (SVG fallback).
+- Future scope (for next sprints): social constellation sharing, adaptive difficulty, gamified streak rewards, predictions for best times to complete habits.
+
+---
+
+## Contributing
+1. Open an issue for feature requests or bugs.
+2. Create a branch: `feature/short-description`.
+3. Run tests (if present) and open a PR with a clear description and demo GIF.
+4. Keep changes small and modular; update docs where needed.
+
+Code style
+- Frontend: ESLint + Prettier (follow existing config)
+- Commit messages: present-tense, short scope (e.g., "feat(ui): add star hover tooltip")
+
+---
+
+## Troubleshooting
+- DB connection errors: ensure DATABASE_URL is correct and Postgres is reachable.
+- AI failing: check ANTHROPIC_API_KEY and server logs for API errors.
+- Slow 3D: enable reduced-motion or resize canvas with fewer particles.
+
+---
+
+## License & Credits
+MIT License — see LICENSE.md
+
+Built with ❤️ using React, React Three Fiber, Prisma, PostgreSQL, and Claude (Anthropic).
+
+---
+
+## Assets & Final polish suggestions (for hackathon presentation)
+- Add a 3–8s hero loop: `assets/demo.webm` (high quality, small file) and reference it in README demo area.
+- Create an animated GIF for README preview: convert webm → gif for GitHub listing.
+- Add a short 1-minute walkthrough video in `/assets/walkthrough.mp4` for reviewers.
+- Provide a "For Judges" section with a short bullet list of 3 things to test (star lighting, AI insight, reduced-motion toggle).
