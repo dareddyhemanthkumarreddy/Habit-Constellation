@@ -6,7 +6,7 @@
 [![Tech: React+R3F](https://img.shields.io/badge/Tech-React%2C%20R3F-lightgrey)]
 [![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey)]
 
-Live demo: (add your deployed URL here)  
+Live demo: (https://habit-constellation.onrender.com/)  
 Hero demo GIF: (add `/assets/demo.gif` or `/assets/demo.webm`)
 
 One-line: Transform daily habits into a living, interactive 3D night sky — complete a habit, light a star, reveal patterns with AI.
@@ -48,18 +48,6 @@ Core files to highlight
 - client/src/components/constellation/ConnectionLine.jsx — connecting beams
 - client/src/components/constellation/StaticStarMap.jsx — SVG fallback for reduced-motion
 - server/src/services/ai.service.js — AI aggregate insights
-
----
-
-## Demo / Visuals (How to show in the hackathon)
-- Place a short hero video/gif (3–8s) at repo root: `/assets/demo.webm` or `/assets/demo.gif`.
-- In-person demo checklist:
-  1. Open Live Demo (or run locally) → show the 3D viewport rotating.
-  2. Mark a habit as completed → watch the star appear and pulse.
-  3. Toggle date range → show how constellations form over days.
-  4. Open "AI Insights" panel → show the automated suggestion summary.
-  5. Toggle "Reduced Motion" → show SVG fallback.
-- Tip: Record a short 10–20s screencast where you complete a habit and AI returns a suggestion — judges love the before/after flow.
 
 ---
 
@@ -167,12 +155,6 @@ Flow: client → API endpoints (CRUD) → DB → server aggregates → AI servic
 
 ---
 
-## Roadmap & Hackathon Pitch (What to show judges)
-- Demonstrate the 3D star appearing when a habit is completed, then show AI summary of your last 7 days that recommends a micro-goal.
-- Highlight accessibility (SVG fallback).
-- Future scope (for next sprints): social constellation sharing, adaptive difficulty, gamified streak rewards, predictions for best times to complete habits.
-
----
 
 ## Contributing
 1. Open an issue for feature requests or bugs.
@@ -200,8 +182,3 @@ Built with ❤️ using React, React Three Fiber, Prisma, PostgreSQL, and Claude
 
 ---
 
-## Assets & Final polish suggestions (for hackathon presentation)
-- Add a 3–8s hero loop: `assets/demo.webm` (high quality, small file) and reference it in README demo area.
-- Create an animated GIF for README preview: convert webm → gif for GitHub listing.
-- Add a short 1-minute walkthrough video in `/assets/walkthrough.mp4` for reviewers.
-- Provide a "For Judges" section with a short bullet list of 3 things to test (star lighting, AI insight, reduced-motion toggle).
