@@ -7,8 +7,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey)]
 
 Live demo: (https://habit-constellation.onrender.com/)  
-Hero demo GIF: demo.gif
-<img width="400" height="225" alt="demo" src="https://github.com/user-attachments/assets/a4a467d4-af80-4529-a78c-445caa1f9578" />
+Hero demo GIF: 
+
+<img width="800" height="400" alt="demo" src="https://github.com/user-attachments/assets/a4a467d4-af80-4529-a78c-445caa1f9578" />
 
 One-line: Transform daily habits into a living, interactive 3D night sky — complete a habit, light a star, reveal patterns with AI.
 
