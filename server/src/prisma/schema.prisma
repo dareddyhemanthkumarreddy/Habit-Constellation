@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String     @id @default(uuid())
+  email         String     @unique
+  passwordHash  String
+  createdAt     DateTime   @default(now())
+  habits        Habit[]
+  checkins      Checkin[]
+  insights      Insight[]
+}
+
+model Habit {
+  id            String     @id @default(uuid())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name          String
+  icon          String
+  category      String?
+  isCustom      Boolean    @default(false)
+  isArchived    Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  checkins      Checkin[]
+}
+
+model Checkin {
+  id            String     @id @default(uuid())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  habitId       String
+  habit         Habit      @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  date          DateTime   @db.Date
+  createdAt     DateTime   @default(now())
+
+  @@unique([habitId, date])
+}
+
+model Insight {
+  id            String     @id @default(uuid())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  weekStart     DateTime   @db.Date
+  content       String
+  createdAt     DateTime   @default(now())
+}

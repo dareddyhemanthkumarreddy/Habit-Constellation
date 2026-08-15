@@ -1,0 +1,86 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --color-void-space: #03030A;
+  --color-void-deep: #070714;
+  --color-void-card: #0D0E26;
+  --color-cosmic-violet: #8A5CF5;
+  --color-cyan-electric: #00F2FE;
+  --color-supernova-gold: #FFD700;
+  --color-comet-pink: #FF2A85;
+  --color-pearl-white: #F8FAFC;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-void-space);
+  background-image: 
+    radial-gradient(circle at 50% 15%, rgba(138, 92, 245, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 80% 60%, rgba(0, 242, 254, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(255, 42, 133, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, #070714 0%, #03030A 100%);
+  background-attachment: fixed;
+  color: var(--color-pearl-white);
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: rgba(13, 14, 38, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(138, 92, 245, 0.25);
+  box-shadow: 0 20px 50px rgba(3, 3, 10, 0.6);
+}
+
+.glass-panel-interactive {
+  background: rgba(13, 14, 38, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(138, 92, 245, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-interactive:hover {
+  background: rgba(13, 14, 38, 0.85);
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 0 10px 30px -5px rgba(0, 242, 254, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Neon Text Glows */
+.glow-text-gold {
+  text-shadow: 0 0 16px rgba(255, 215, 0, 0.75), 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 16px rgba(0, 242, 254, 0.75), 0 0 30px rgba(0, 242, 254, 0.3);
+}
+
+.glow-text-violet {
+  text-shadow: 0 0 16px rgba(138, 92, 245, 0.75), 0 0 30px rgba(138, 92, 245, 0.3);
+}
+
+.glow-text-pink {
+  text-shadow: 0 0 16px rgba(255, 42, 133, 0.75);
+}
+
+/* Custom Cosmic Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #03030A;
+}
+::-webkit-scrollbar-thumb {
+  background: #0D0E26;
+  border-radius: 4px;
+  border: 1px solid rgba(138, 92, 245, 0.4);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8A5CF5;
+  box-shadow: 0 0 10px #8A5CF5;
+}
